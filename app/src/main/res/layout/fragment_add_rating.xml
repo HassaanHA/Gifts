@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.giftox.app.viewmodels.CelebrityViewModel" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        app:cardCornerRadius="@dimen/_20sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_gradient">
+
+            <ImageView
+                android:id="@+id/closeBtn"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/ic_close_round_filled_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/labelWriteReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroy_extra_bold"
+                android:labelFor="@id/reviewEt"
+                android:text="@string/write_review"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/closeBtn" />
+
+            <EditText
+                android:id="@+id/reviewEt"
+                style="@style/InputBox"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="none"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                app:layout_constraintTop_toBottomOf="@id/labelWriteReview" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:scaleX=".7"
+                android:scaleY=".7"
+                android:stepSize="1"
+                android:progressBackgroundTint="@color/lightBlue"
+                android:progressTint="@color/brown"
+                android:transformPivotX="1dp"
+                android:transformPivotY="@dimen/_30sdp"
+                app:layout_constraintBottom_toBottomOf="@id/submitBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/submitBtn" />
+
+            <TextView
+                android:id="@+id/submitBtn"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_24sdp"
+                android:background="@drawable/bg_oval_btn_light_blue"
+                android:fontFamily="@font/gilroy_light"
+                android:paddingStart="@dimen/_18sdp"
+                android:paddingTop="@dimen/_6sdp"
+                android:paddingEnd="@dimen/_18sdp"
+                android:paddingBottom="@dimen/_6sdp"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reviewEt" />
+
+            <View
+                isVisible="@{viewModel.inProgress}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#4D000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                isVisible="@{viewModel.inProgress}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

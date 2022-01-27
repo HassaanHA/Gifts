@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.giftox.app.data.Product" />
+
+        <variable
+            name="isSelected"
+            type="Boolean" />
+
+        <variable
+            name="shouldShowSelectionOption"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginBottom="@dimen/_6sdp">
+
+        <ImageView
+            android:id="@+id/iconIv"
+            imageUrl="@{ isSelected || !shouldShowSelectionOption ? product.productDetails.hoverIcon : product.productDetails.icon}"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_giftox_video_off" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:fontFamily="@font/gilroy_light"
+            android:text="@{product.productDetails.title}"
+            android:textColor="@color/secondaryBlue"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="@id/iconIv"
+            app:layout_constraintStart_toEndOf="@id/iconIv"
+            app:layout_constraintTop_toTopOf="@id/iconIv"
+            tools:text="@string/giftox_video" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:text='@{"$" + product.price}'
+            android:textColor="@color/secondaryBlue"
+            app:layout_goneMarginEnd="@dimen/_24sdp"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="@id/iconIv"
+            app:layout_constraintEnd_toStartOf="@id/checkboxIv"
+            app:layout_constraintTop_toTopOf="@id/iconIv" />
+
+        <ImageView
+            android:id="@+id/checkboxIv"
+            isVisible="@{shouldShowSelectionOption}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:contentDescription="@null"
+            android:src="@{ isSelected ? @drawable/ic_checkbox_on : @drawable/ic_checkbox_off}"
+            app:layout_constraintBottom_toBottomOf="@id/iconIv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iconIv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

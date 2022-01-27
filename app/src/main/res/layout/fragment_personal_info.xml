@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.giftox.app.viewmodels.ProfileViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBlue">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/firstNameEt"
+                style="@style/InputBox"
+                error="@{viewModel.firstNameError}"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:autofillHints="firstName"
+                android:hint="@string/first_name"
+                android:inputType="textPersonName"
+                android:text="@={viewModel.firstName}"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/emailEt"
+                style="@style/InputBox"
+                error="@{viewModel.emailError}"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:autofillHints="emailAddress"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.email}"
+                app:layout_constraintTop_toBottomOf="@id/firstNameEt" />
+
+            <EditText
+                android:id="@+id/mobileEt"
+                style="@style/InputBox"
+                error="@{viewModel.mobileError}"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:autofillHints="phone"
+                android:hint="@string/mobile"
+                android:inputType="phone"
+                android:text="@={viewModel.mobile}"
+                app:layout_constraintTop_toBottomOf="@id/emailEt" />
+
+            <TextView
+                android:id="@+id/countryTv"
+                style="@style/InputBox"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:hint="@string/country"
+                android:text="@{viewModel.country}"
+                app:drawableEndCompat="@drawable/ic_arrow_down_white"
+                app:layout_constraintTop_toBottomOf="@id/mobileEt" />
+
+            <TextView
+                android:id="@+id/birthdayTv"
+                style="@style/InputBox"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:hint="@string/birthday"
+                android:text="@{viewModel.birthday}"
+                app:drawableEndCompat="@drawable/ic_arrow_down_white"
+                app:layout_constraintTop_toBottomOf="@id/countryTv" />
+
+            <TextView
+                android:id="@+id/labelGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:fontFamily="@font/gilroy_extra_bold"
+                android:text="@string/gender"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/birthdayTv" />
+
+            <RadioGroup
+                android:id="@+id/genderRg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/labelGender">
+
+                <RadioButton
+                    android:id="@+id/maleRb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/lightBlue"
+                    android:checked='@{viewModel.gender.equals("male")}'
+                    android:fontFamily="@font/gilroy_light"
+                    android:text="@string/male"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/femaleRb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_36sdp"
+                    android:buttonTint="@color/lightBlue"
+                    android:checked='@{viewModel.gender.equals("female")}'
+                    android:fontFamily="@font/gilroy_light"
+                    android:text="@string/female"
+                    android:textColor="@color/white" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/saveBtn"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:background="@drawable/bg_rec_btn_light_blue"
+                android:fontFamily="@font/gilroy_light"
+                android:onClick="@{(v)-> viewModel.updateProfile()}"
+                android:paddingStart="@dimen/_40sdp"
+                android:paddingTop="@dimen/_6sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:paddingBottom="@dimen/_6sdp"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/genderRg" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

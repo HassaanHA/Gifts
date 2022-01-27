@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.giftox.app.viewmodels.MyOrdersViewModel" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        app:cardCornerRadius="@dimen/_20sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_gradient">
+
+            <ImageView
+                android:id="@+id/closeBtn"
+                isEnabled="@{!viewModel.inProgress}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/ic_close_round_filled_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/orderNumberTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroy_extra_bold"
+                android:text="@{`#` + viewModel.selectedOrder.orderId}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/closeBtn"
+                tools:text="#12" />
+
+            <TextView
+                android:id="@+id/labelTo"
+                style="@style/DialogLabels"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/to"
+                app:layout_constraintEnd_toStartOf="@id/toTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/orderNumberTv" />
+
+            <TextView
+                android:id="@+id/toTv"
+                style="@style/DialogValues"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{viewModel.selectedOrder.customer.firstName}"
+                app:layout_constraintBottom_toBottomOf="@id/labelTo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/labelTo"
+                app:layout_constraintTop_toTopOf="@id/labelTo"
+                tools:text="The Right Faiq" />
+
+            <TextView
+                android:id="@+id/labelDate"
+                style="@style/DialogLabels"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                app:layout_constraintEnd_toStartOf="@id/dateTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelTo" />
+
+            <TextView
+                android:id="@+id/dateTv"
+                style="@style/DialogValues"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{viewModel.selectedOrder.createdAt}"
+                app:layout_constraintBottom_toBottomOf="@id/labelDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/labelDate"
+                app:layout_constraintTop_toTopOf="@id/labelDate"
+                tools:text="04 Jan, 2024" />
+
+            <TextView
+                android:id="@+id/labelType"
+                style="@style/DialogLabels"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/type"
+                app:layout_constraintEnd_toStartOf="@id/typeTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelDate" />
+
+            <TextView
+                android:id="@+id/typeTv"
+                style="@style/DialogValues"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{viewModel.selectedOrder.type}"
+                app:layout_constraintBottom_toBottomOf="@id/labelType"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/labelType"
+                app:layout_constraintTop_toTopOf="@id/labelType"
+                tools:text="Insta Like/Comment" />
+
+            <TextView
+                android:id="@+id/labelOccasion"
+                style="@style/DialogLabels"
+                isVisible='@{viewModel.selectedOrder.celebrity == null &amp;&amp; viewModel.selectedOrder.occasion.title != null}'
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/occasion"
+                app:layout_constraintEnd_toStartOf="@id/occasionTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelType" />
+
+            <TextView
+                android:id="@+id/occasionTv"
+                style="@style/DialogValues"
+                isVisible='@{viewModel.selectedOrder.celebrity == null &amp;&amp; viewModel.selectedOrder.occasion.title != null}'
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{viewModel.selectedOrder.occasion.title}"
+                app:layout_constraintBottom_toBottomOf="@id/labelOccasion"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/labelOccasion"
+                app:layout_constraintTop_toTopOf="@id/labelOccasion"
+                tools:text="Birthday" />
+
+            <TextView
+                android:id="@+id/labelSpecialWishes"
+                style="@style/DialogLabels"
+                isVisible='@{viewModel.selectedOrder.celebrity == null &amp;&amp; viewModel.selectedOrder.specialWishes != null}'
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/special_wishes"
+                app:layout_constraintEnd_toStartOf="@id/specialWishesTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelOccasion" />
+
+            <TextView
+                android:id="@+id/specialWishesTv"
+                style="@style/DialogValues"
+                isVisible='@{viewModel.selectedOrder.celebrity == null &amp;&amp; viewModel.selectedOrder.specialWishes != null}'
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{viewModel.selectedOrder.specialWishes}"
+                app:layout_constraintBottom_toBottomOf="@id/labelSpecialWishes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/labelSpecialWishes"
+                app:layout_constraintTop_toTopOf="@id/labelSpecialWishes"
+                tools:text="Bla Bla Bla..." />
+
+            <TextView
+                android:id="@+id/labelStatus"
+                style="@style/DialogLabels"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                app:layout_constraintEnd_toStartOf="@id/statusTv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelSpecialWishes" />
+
+            <TextView
+                android:id="@+id/statusTv"
+                style="@style/DialogValues"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{viewModel.selectedOrder.status}"
+                app:layout_constraintBottom_toBottomOf="@id/labelStatus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/labelStatus"
+                app:layout_constraintTop_toTopOf="@id/labelStatus"
+                tools:text="Pending" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginBottom="@dimen/_24sdp"
+                android:fontFamily="@font/gilroy_extra_bold"
+                android:text="@{`$` + viewModel.selectedOrder.price}"
+                android:textColor="@color/lightBlue"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/statusTv"
+                tools:text="$22" />
+
+            <TextView
+                android:id="@+id/editBtn"
+                isEnabled="@{!viewModel.inProgress}"
+                isVisible='@{viewModel.selectedOrder.type.equals("other") &amp;&amp; viewModel.selectedOrder.celebrity == null &amp;&amp; viewModel.selectedOrder.status.equals("pending")}'
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_24sdp"
+                android:background="@drawable/bg_rec_btn_light_blue"
+                android:fontFamily="@font/gilroy_light"
+                android:paddingStart="@dimen/_18sdp"
+                android:paddingTop="@dimen/_6sdp"
+                android:paddingEnd="@dimen/_18sdp"
+                android:paddingBottom="@dimen/_6sdp"
+                android:text="@string/edit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/uploadVideoBtn"
+                isEnabled="@{!viewModel.inProgress}"
+                isVisible='@{viewModel.selectedOrder.type.equals("video") &amp;&amp; viewModel.selectedOrder.celebrity == null &amp;&amp; viewModel.selectedOrder.status.equals("pending")}'
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:contentDescription="@null"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/ic_upload_video"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                isVisible="@{viewModel.inProgress}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#4D000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                isVisible="@{viewModel.inProgress}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

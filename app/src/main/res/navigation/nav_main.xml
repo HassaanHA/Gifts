@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/home_fragment">
+
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.giftox.app.views.HomeFragment"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_home_fragment_to_celebrity_details_fragment"
+            app:destination="@id/celebrity_details_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/celebrity_details_fragment"
+        android:name="com.giftox.app.views.CelebrityDetailsFragment"
+        tools:layout="@layout/fragment_celebrity_details">
+
+        <action
+            android:id="@+id/action_celebrity_details_fragment_to_customize_giftox_video_fragment"
+            app:destination="@id/customize_giftox_video_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_celebrity_details_fragment_to_customize_giftox_social_media_fragment"
+            app:destination="@id/customize_giftox_social_media_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_celebrity_details_fragment_to_celebrity_reviews_fragment"
+            app:destination="@id/celebrity_reviews_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="celebrity"
+            android:defaultValue="@null"
+            app:argType="com.giftox.app.data.Celebrity"
+            app:nullable="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/celebrity_reviews_fragment"
+        android:name="com.giftox.app.views.CelebrityReviewsFragment"
+        tools:layout="@layout/fragment_celebrity_reviews" />
+
+    <fragment
+        android:id="@+id/customize_giftox_video_fragment"
+        android:name="com.giftox.app.views.CustomizeGiftoxVideoFragment"
+        tools:layout="@layout/fragment_customize_giftox_video">
+
+        <action
+            android:id="@+id/action_customize_giftox_video_fragment_to_customize_giftox_social_media_fragment"
+            app:destination="@id/customize_giftox_social_media_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_customize_giftox_video_fragment_to_confirm_checkout_fragment"
+            app:destination="@id/confirm_checkout_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/customize_giftox_social_media_fragment"
+        android:name="com.giftox.app.views.CustomizeGiftoxSocialFragment"
+        tools:layout="@layout/fragment_customize_giftox_social_media">
+
+        <action
+            android:id="@+id/action_customize_giftox_social_media_fragment_to_confirm_checkout_fragment"
+            app:destination="@id/confirm_checkout_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/confirm_checkout_fragment"
+        android:name="com.giftox.app.views.ConfirmCheckoutFragment"
+        tools:layout="@layout/fragment_confirm_checkout">
+
+        <action
+            android:id="@+id/action_confirm_checkout_fragment_to_home_fragment"
+            app:destination="@id/home_fragment"
+            app:enterAnim="@anim/hold"
+            app:exitAnim="@anim/slide_out_bottom"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/home_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="com.giftox.app.views.SearchFragment"
+        tools:layout="@layout/fragment_search">
+
+        <action
+            android:id="@+id/action_search_fragment_to_search_results_fragment"
+            app:destination="@id/search_results_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profile_fragment"
+        android:name="com.giftox.app.views.ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/my_orders_fragment"
+        android:name="com.giftox.app.views.MyOrdersFragment"
+        tools:layout="@layout/fragment_my_orders" />
+
+    <fragment
+        android:id="@+id/search_results_fragment"
+        android:name="com.giftox.app.views.SearchResultsFragment"
+        tools:layout="@layout/fragment_search_results">
+
+        <action
+            android:id="@+id/action_search_results_fragment_to_celebrity_details_fragment"
+            app:destination="@id/celebrity_details_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <activity
+        android:id="@+id/authentication_activity"
+        android:name="com.giftox.app.views.AuthenticationActivity"
+        tools:layout="@layout/activity_authentication" />
+
+</navigation>

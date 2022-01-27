@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.giftox.app.viewmodels.HomeViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBlue">
+
+        <ImageView
+            android:id="@+id/drawerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:padding="@dimen/_12sdp"
+            android:src="@drawable/ic_drawer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:drawablePadding="@dimen/_4sdp"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:gravity="center_vertical"
+            android:text="@string/giftox"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            app:drawableEndCompat="@drawable/ic_giftox_video_on"
+            app:layout_constraintBottom_toBottomOf="@id/drawerBtn"
+            app:layout_constraintStart_toEndOf="@id/drawerBtn"
+            app:layout_constraintTop_toTopOf="@id/drawerBtn" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/bannersVp"
+            list="@{viewModel.banners}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120sdp"
+            app:layout_constraintTop_toBottomOf="@id/drawerBtn" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/bannersIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="@id/bannersVp"
+            app:layout_constraintTop_toTopOf="@id/bannersVp"
+            app:tabBackground="@drawable/tab_pager_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp" />
+
+        <TextView
+            android:id="@+id/twitterMarqueeTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_twitter_marquee"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/gilroy_light"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_24sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:singleLine="true"
+            android:text="@{viewModel.tweets}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintTop_toBottomOf="@id/bannersVp"
+            tools:text="Twitter Marquee Text Goes Here" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/collectionsRv"
+            list="@{viewModel.collections}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/twitterMarqueeTv"
+            tools:listitem="@layout/item_collection" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

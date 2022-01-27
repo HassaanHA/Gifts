@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.giftox.app.viewmodels.ProfileViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBlue">
+
+        <ImageView
+            android:id="@+id/drawerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:padding="@dimen/_12sdp"
+            android:src="@drawable/ic_drawer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:drawablePadding="@dimen/_4sdp"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:gravity="center_vertical"
+            android:text="@string/giftox"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp"
+            app:drawableEndCompat="@drawable/ic_giftox_video_on"
+            app:layout_constraintBottom_toBottomOf="@id/drawerBtn"
+            app:layout_constraintStart_toEndOf="@id/drawerBtn"
+            app:layout_constraintTop_toTopOf="@id/drawerBtn" />
+
+        <TextView
+            android:id="@+id/labelUserSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:gravity="center"
+            android:text="@{viewModel.user.firstName + `'s Settings`}"
+            android:textColor="@color/lightBlue"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintTop_toBottomOf="@id/drawerBtn"
+            tools:text="Chris's Settings" />
+
+        <TextView
+            android:id="@+id/passwordsTab"
+            style="@style/SettingsTab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:alpha="@{viewModel.selectedTab == 0 ? 1.0f : 0.75f}"
+            android:background="@drawable/bg_oval_btn_secondary_blue"
+            android:onClick="@{(v)-> viewModel.setSelectedTab(0)}"
+            android:text="@string/my_passwords"
+            app:layout_constraintEnd_toStartOf="@id/personalInfoTab"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labelUserSettings" />
+
+        <TextView
+            android:id="@+id/personalInfoTab"
+            style="@style/SettingsTab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="@{viewModel.selectedTab == 1 ? 1.0f : 0.75f}"
+            android:background="@drawable/bg_oval_btn_brown"
+            android:onClick="@{(v)-> viewModel.setSelectedTab(1)}"
+            android:text="@string/my_personal_info"
+            app:layout_constraintEnd_toStartOf="@id/portfolioTab"
+            app:layout_constraintStart_toEndOf="@id/passwordsTab"
+            app:layout_constraintTop_toTopOf="@id/passwordsTab"
+            app:layout_goneMarginEnd="@dimen/_12sdp" />
+
+        <TextView
+            android:id="@+id/portfolioTab"
+            style="@style/SettingsTab"
+            isVisible='@{viewModel.user.userType.equals("celebrity")}'
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:alpha="@{viewModel.selectedTab == 2 ? 1.0f : 0.75f}"
+            android:background="@drawable/bg_oval_btn_pink"
+            android:onClick="@{(v)-> viewModel.setSelectedTab(2)}"
+            android:text="@string/my_portfolio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/personalInfoTab"
+            app:layout_constraintTop_toTopOf="@id/passwordsTab" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passwordsTab" />
+
+        <View
+            isVisible="@{viewModel.inProgress}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#4D000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            isVisible="@{viewModel.inProgress}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

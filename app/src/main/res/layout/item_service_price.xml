@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.giftox.app.data.Product" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryBlue">
+
+        <EditText
+            android:id="@+id/priceEt"
+            style="@style/InputBox"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:autofillHints="none"
+            android:digits="0123456789"
+            android:gravity="center"
+            android:hint="@string/dollar_sign"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textSize="@dimen/_9ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:ellipsize="end"
+            android:fontFamily="@font/gilroy_light"
+            android:maxLines="1"
+            android:text="@{product.productDetails.title}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@id/priceEt"
+            app:layout_constraintStart_toEndOf="@id/priceEt"
+            app:layout_constraintTop_toTopOf="@id/priceEt"
+            tools:text="Giftox Video" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

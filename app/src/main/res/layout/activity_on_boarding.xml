@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBlue">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/onBoardingVp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <View
+            android:id="@+id/gradientView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_180sdp"
+            android:alpha=".8"
+            android:background="@drawable/bottom_gradient"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <com.github.vivchar.viewpagerindicator.ViewPagerIndicator
+            android:id="@+id/viewPagerIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            app:delimiterSize="@dimen/_6sdp"
+            app:itemScale="2"
+            app:itemSelectedTint="@color/secondaryBlue"
+            app:itemSize="@dimen/_6sdp"
+            app:itemTint="#4DFFFFFF"
+            app:layout_constraintBottom_toBottomOf="@id/gradientView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/gradientView"
+            app:layout_constraintVertical_bias=".35" />
+
+        <TextView
+            android:id="@+id/skipButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_light"
+            android:padding="@dimen/_12sdp"
+            android:text="@string/skip"
+            android:textColor="@color/secondaryBlue"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@id/viewPagerIndicator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/viewPagerIndicator" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

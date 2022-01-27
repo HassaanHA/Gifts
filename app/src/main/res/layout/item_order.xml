@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="myOrder"
+            type="com.giftox.app.data.MyOrder" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginBottom="@dimen/_6sdp">
+
+        <TextView
+            android:id="@+id/orderNumberTv"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:gravity="center"
+            android:text="@{`#` + myOrder.orderId}"
+            android:textColor="@color/secondaryBlue"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="#834689" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/celebrityDpContainer"
+            isVisible="@{myOrder.celebrity != null}"
+            app:cardCornerRadius="@dimen/_24sdp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="0dp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="@id/celebrityOrServiceNameTv"
+            app:layout_constraintStart_toStartOf="@id/celebrityOrServiceNameTv"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                imageUrl='@{myOrder.celebrity.avatar}'
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/serviceIconIv"
+            imageUrl="@{myOrder.productDetails.hoverIcon}"
+            isVisible="@{myOrder.celebrity == null}"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="@id/celebrityOrServiceNameTv"
+            app:layout_constraintStart_toStartOf="@id/celebrityOrServiceNameTv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/iconBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="celebrityDpContainer, serviceIconIv" />
+
+        <TextView
+            android:id="@+id/celebrityOrServiceNameTv"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:ellipsize="end"
+            android:fontFamily="@font/gilroy_light"
+            android:gravity="center_horizontal"
+            android:maxLines="1"
+            android:text='@{myOrder.celebrity != null ? myOrder.celebrity.firstName : myOrder.productDetails.title}'
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/orderNumberTv"
+            app:layout_constraintTop_toBottomOf="@id/iconBarrier"
+            tools:text="Mariah Carey" />
+
+        <TextView
+            android:id="@+id/orderDateTv"
+            date="@{myOrder.createdAt}"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:fontFamily="@font/gilroy_light"
+            android:minWidth="@dimen/_70sdp"
+            android:textColor="@color/secondaryBlue"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/celebrityOrServiceNameTv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Dec 12, 2021" />
+
+        <ImageView
+            android:id="@+id/viewOrderBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:contentDescription="@null"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_view_order"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/orderDateTv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

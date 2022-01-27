@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="socialLink"
+            type="com.giftox.app.data.SocialLink" />
+
+        <variable
+            name="isFirstItem"
+            type="Boolean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primaryBlue"
+        android:paddingTop="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_6sdp"
+        app:layout_constraintTop_toBottomOf="@id/labelSocialMedia">
+
+        <TextView
+            android:id="@+id/socialLinkTitleTv"
+            style="@style/InputBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:autofillHints="Name"
+            android:text="@{socialLink.type}"
+            app:drawableEndCompat="@drawable/ic_arrow_down_white"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/insta_like_comment" />
+
+        <TextView
+            android:id="@+id/labelLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:fontFamily="@font/gilroy_light"
+            android:labelFor="@id/linkEt"
+            android:text="@string/link"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@id/linkEt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/linkEt" />
+
+        <EditText
+            android:id="@+id/linkEt"
+            style="@style/InputBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{socialLink.link}"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:autofillHints="Name"
+            android:drawablePadding="@dimen/_12ssp"
+            android:inputType="textWebEditText"
+            app:layout_constraintEnd_toStartOf="@id/addRemoveBtn"
+            app:layout_constraintStart_toEndOf="@id/labelLink"
+            app:layout_constraintTop_toBottomOf="@id/socialLinkTitleTv" />
+
+        <ImageView
+            android:id="@+id/addRemoveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:contentDescription="@null"
+            android:src="@{ isFirstItem ? @drawable/ic_add_social_item : @drawable/ic_remove_social_item}"
+            app:layout_constraintBottom_toBottomOf="@id/linkEt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/linkEt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

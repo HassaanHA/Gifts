@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.giftox.app.viewmodels.MyOrdersViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBlue">
+
+        <View
+            android:id="@+id/dividerTop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/labelOrder"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:gravity="center"
+            android:text="@string/order"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toTopOf="@id/dividerBottom"
+            app:layout_constraintStart_toStartOf="@id/dividerTop"
+            app:layout_constraintTop_toBottomOf="@id/dividerTop" />
+
+        <TextView
+            android:id="@+id/labelCelebrityOrService"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:gravity="center"
+            android:text='@{viewModel.user.userType.equals("celebrity") ? "Service" : "Celebrity"}'
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@id/labelOrder"
+            app:layout_constraintStart_toEndOf="@id/labelOrder"
+            app:layout_constraintTop_toTopOf="@id/labelOrder"
+            tools:text="Celebrity" />
+
+        <TextView
+            android:id="@+id/labelDate"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:gravity="center"
+            android:text="@string/date"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@id/labelOrder"
+            app:layout_constraintStart_toEndOf="@id/labelCelebrityOrService"
+            app:layout_constraintTop_toTopOf="@id/labelOrder" />
+
+        <View
+            android:id="@+id/dividerBottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/labelOrder" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ordersRv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dividerBottom"
+            tools:listitem="@layout/item_order" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

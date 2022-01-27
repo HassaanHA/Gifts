@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.giftox.app.viewmodels.AuthenticationViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_gradient">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:padding="@dimen/_12sdp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="@id/labelWelcome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelWelcome" />
+
+        <TextView
+            android:id="@+id/labelWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:text="@string/welcome"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backBtn">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/labelCelebrityInputDetailsMessage"
+                    isVisible='@{viewModel.registrationType == "celebrity"}'
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/gilroy_light"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/_24sdp"
+                    android:paddingEnd="@dimen/_24sdp"
+                    android:text="@string/please_fill_in_the_complete_details_in_the_form_below"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/firstNameEt"
+                    style="@style/InputBox"
+                    error="@{viewModel.firstNameError}"
+                    isEnabled="@{!viewModel.inProgress}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:autofillHints="firstName"
+                    android:hint="@string/first_name"
+                    android:inputType="textPersonName"
+                    android:text="@={viewModel.firstName}"
+                    app:layout_constraintTop_toBottomOf="@+id/labelCelebrityInputDetailsMessage" />
+
+                <EditText
+                    android:id="@+id/lastNameEt"
+                    style="@style/InputBox"
+                    error="@{viewModel.lastNameError}"
+                    isEnabled="@{!viewModel.inProgress}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:autofillHints="lastName"
+                    android:hint="@string/last_name"
+                    android:inputType="textPersonName"
+                    android:text="@={viewModel.lastName}"
+                    app:layout_constraintTop_toBottomOf="@id/firstNameEt" />
+
+                <TextView
+                    android:id="@+id/birthdayTv"
+                    style="@style/InputBox"
+                    isEnabled="@{!viewModel.inProgress}"
+                    isVisible='@{viewModel.registrationType != "celebrity"}'
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:hint="@string/birthday"
+                    android:text="@{viewModel.dateOfBirth}"
+                    app:layout_constraintTop_toBottomOf="@id/lastNameEt" />
+
+                <EditText
+                    android:id="@+id/emailEt"
+                    style="@style/InputBox"
+                    error="@{viewModel.emailError}"
+                    isEnabled="@{!viewModel.inProgress}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:autofillHints="emailAddress"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:text="@={viewModel.email}"
+                    app:layout_constraintTop_toBottomOf="@id/birthdayTv" />
+
+                <EditText
+                    android:id="@+id/passwordEt"
+                    style="@style/InputBox"
+                    error="@{viewModel.passwordError}"
+                    isEnabled="@{!viewModel.inProgress}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:autofillHints="emailAddress"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:text="@={viewModel.password}"
+                    app:layout_constraintTop_toBottomOf="@id/emailEt" />
+
+                <ImageView
+                    android:id="@+id/passwordVisibilityToggle"
+                    isEnabled="@{!viewModel.inProgress}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:onClick="@{(v)-> viewModel.togglePasswordVisibility()}"
+                    android:padding="@dimen/_8sdp"
+                    android:src="@drawable/ic_show_password"
+                    app:layout_constraintBottom_toBottomOf="@id/passwordEt"
+                    app:layout_constraintEnd_toEndOf="@id/passwordEt"
+                    app:layout_constraintTop_toTopOf="@id/passwordEt" />
+
+                <EditText
+                    android:id="@+id/repeatPasswordEt"
+                    style="@style/InputBox"
+                    error="@{viewModel.repeatPasswordError}"
+                    isEnabled="@{!viewModel.inProgress}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_12sdp"
+                    android:autofillHints="emailAddress"
+                    android:hint="@string/repeat_password"
+                    android:inputType="textPassword"
+                    android:text="@={viewModel.repeatPassword}"
+                    app:layout_constraintTop_toBottomOf="@id/passwordEt" />
+
+                <ImageView
+                    android:id="@+id/repeatPasswordVisibilityToggle"
+                    isEnabled="@{!viewModel.inProgress}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:onClick="@{(v)-> viewModel.toggleRepeatPasswordVisibility()}"
+                    android:padding="@dimen/_8sdp"
+                    android:src="@drawable/ic_show_password"
+                    app:layout_constraintBottom_toBottomOf="@id/repeatPasswordEt"
+                    app:layout_constraintEnd_toEndOf="@id/repeatPasswordEt"
+                    app:layout_constraintTop_toTopOf="@id/repeatPasswordEt" />
+
+                <TextView
+                    android:id="@+id/labelDescription"
+                    isVisible='@{viewModel.registrationType == "celebrity"}'
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/gilroy_extra_bold"
+                    android:labelFor="@+id/descriptionEt"
+                    android:text="@string/description"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/repeatPasswordEt" />
+
+                <EditText
+                    android:id="@+id/descriptionEt"
+                    style="@style/InputBox"
+                    error="@{viewModel.descriptionError}"
+                    isEnabled="@{!viewModel.inProgress}"
+                    isVisible='@{viewModel.registrationType == "celebrity"}'
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="description"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:text="@={viewModel.description}"
+                    app:layout_constraintTop_toBottomOf="@id/labelDescription" />
+
+                <TextView
+                    android:id="@+id/labelCategory"
+                    isVisible='@{viewModel.registrationType == "celebrity"}'
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:fontFamily="@font/gilroy_extra_bold"
+                    android:labelFor="@+id/descriptionEt"
+                    android:text="@string/category"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/descriptionEt" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/categoriesRv"
+                    isEnabled="@{!viewModel.inProgress}"
+                    isVisible='@{viewModel.registrationType == "celebrity"}'
+                    list="@{viewModel.categories}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/labelCategory" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/termsAndConditionsCb"
+                    isEnabled="@{!viewModel.inProgress}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:buttonTint="@color/white"
+                    android:checked="@={viewModel.termsAndConditionsChecked}"
+                    android:text="@string/i_agree_to_the_terms_and_conditions"
+                    android:textColor="@color/white"
+                    android:textColorLink="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/categoriesRv" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/newsLetterCb"
+                    isEnabled="@{!viewModel.inProgress}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:buttonTint="@color/white"
+                    android:text="@string/receive_newsletter_or_marketing_material"
+                    android:textColor="@color/white"
+                    android:textColorLink="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/termsAndConditionsCb" />
+
+                <TextView
+                    android:id="@+id/registerBtn"
+                    isEnabled="@{!viewModel.inProgress}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/_24sdp"
+                    android:background="@drawable/bg_rec_btn_pink"
+                    android:fontFamily="@font/gilroy_light"
+                    android:onClick="@{(v)-> viewModel.register()}"
+                    android:paddingStart="@dimen/_40sdp"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingEnd="@dimen/_40sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:text="@string/register"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/newsLetterCb" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <View
+            isVisible="@{viewModel.inProgress}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#4D000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            isVisible="@{viewModel.inProgress}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

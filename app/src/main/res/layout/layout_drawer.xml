@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.giftox.app.viewmodels.MainViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/drawerRootView"
+        android:layout_width="@dimen/_230sdp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_drawer">
+
+        <ImageView
+            android:id="@+id/topLogoIv"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_gift"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/greetingTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintTop_toBottomOf="@id/topLogoIv"
+            tools:text="Hello!" />
+
+        <TextView
+            android:id="@+id/settingsBtn"
+            style="@style/DrawerItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:text="@string/settings"
+            app:drawableStartCompat="@drawable/ic_drawer_settings"
+            app:layout_constraintTop_toBottomOf="@id/greetingTv" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintBottom_toTopOf="@id/notificationsBtn"
+            app:layout_constraintTop_toBottomOf="@id/settingsBtn" />
+
+        <TextView
+            android:id="@+id/notificationsBtn"
+            style="@style/DrawerItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/notifications"
+            app:drawableStartCompat="@drawable/ic_drawer_notifications"
+            app:layout_constraintTop_toBottomOf="@id/settingsBtn" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintBottom_toTopOf="@id/ordersBtn"
+            app:layout_constraintTop_toBottomOf="@id/notificationsBtn" />
+
+        <TextView
+            android:id="@+id/ordersBtn"
+            style="@style/DrawerItem"
+            isVisible="@{viewModel.user != null}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/orders"
+            app:drawableStartCompat="@drawable/ic_drawer_my_orders"
+            app:layout_constraintTop_toBottomOf="@id/notificationsBtn" />
+
+        <View
+            isVisible="@{viewModel.user != null}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintBottom_toTopOf="@id/supportBtn"
+            app:layout_constraintTop_toBottomOf="@id/ordersBtn" />
+
+        <TextView
+            android:id="@+id/supportBtn"
+            style="@style/DrawerItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/support"
+            app:drawableStartCompat="@drawable/ic_drawer_support"
+            app:layout_constraintTop_toBottomOf="@id/ordersBtn" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintBottom_toTopOf="@id/tAndCBtn"
+            app:layout_constraintTop_toBottomOf="@id/supportBtn" />
+
+        <TextView
+            android:id="@+id/tAndCBtn"
+            style="@style/DrawerItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/terms_and_conditions"
+            app:drawableStartCompat="@drawable/ic_drawer_t_and_c"
+            app:layout_constraintTop_toBottomOf="@id/supportBtn" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintBottom_toTopOf="@id/privacyPolicyBtn"
+            app:layout_constraintTop_toBottomOf="@id/tAndCBtn" />
+
+        <TextView
+            android:id="@+id/privacyPolicyBtn"
+            style="@style/DrawerItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_policy"
+            app:drawableStartCompat="@drawable/ic_drawer_privacy_policy"
+            app:layout_constraintTop_toBottomOf="@id/tAndCBtn" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintBottom_toTopOf="@id/logoutBtn"
+            app:layout_constraintTop_toBottomOf="@id/privacyPolicyBtn" />
+
+        <TextView
+            android:id="@+id/logoutBtn"
+            style="@style/DrawerItem"
+            isVisible="@{viewModel.user != null}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            app:drawableStartCompat="@drawable/ic_drawer_logout"
+            app:layout_constraintTop_toBottomOf="@id/privacyPolicyBtn" />
+
+        <View
+            isVisible="@{viewModel.user != null}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/logoutBtn" />
+
+        <ImageView
+            android:id="@+id/instaBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_18sdp"
+            android:contentDescription="@null"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/ic_insta_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/linkedInBtn"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/linkedInBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/ic_linked_in_white"
+            app:layout_constraintBottom_toBottomOf="@id/instaBtn"
+            app:layout_constraintEnd_toStartOf="@id/twitterBtn"
+            app:layout_constraintStart_toEndOf="@id/instaBtn"
+            app:layout_constraintTop_toTopOf="@id/instaBtn" />
+
+        <ImageView
+            android:id="@+id/twitterBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/ic_twitter_white"
+            app:layout_constraintBottom_toBottomOf="@id/instaBtn"
+            app:layout_constraintEnd_toStartOf="@id/facebookBtn"
+            app:layout_constraintStart_toEndOf="@id/linkedInBtn"
+            app:layout_constraintTop_toTopOf="@id/instaBtn" />
+
+        <ImageView
+            android:id="@+id/facebookBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/ic_fb_white"
+            app:layout_constraintBottom_toBottomOf="@id/instaBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/twitterBtn"
+            app:layout_constraintTop_toTopOf="@id/instaBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

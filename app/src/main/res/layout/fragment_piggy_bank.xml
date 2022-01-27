@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.giftox.app.viewmodels.MyOrdersViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryBlue">
+
+        <ImageView
+            android:id="@+id/topIconIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_piggy_bank"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/labelBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/gilroy_light"
+            android:text="@string/you_ve_made"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/topIconIv"
+            app:layout_constraintStart_toStartOf="@id/topIconIv"
+            app:layout_constraintTop_toBottomOf="@id/topIconIv" />
+
+        <TextView
+            android:id="@+id/balanceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:text="@{`$` + viewModel.piggyBank.total}"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:textColor="@color/lightBlue"
+            android:textSize="@dimen/_30ssp"
+            app:layout_constraintEnd_toEndOf="@id/topIconIv"
+            app:layout_constraintStart_toStartOf="@id/topIconIv"
+            app:layout_constraintTop_toBottomOf="@id/labelBalance"
+            tools:text="$20" />
+
+        <View
+            android:id="@+id/dividerTop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/balanceTv" />
+
+        <TextView
+            android:id="@+id/labelDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:text="@string/date"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toStartOf="@id/labelPrice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dividerTop" />
+
+        <TextView
+            android:id="@+id/labelPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroy_extra_bold"
+            android:text="@string/price"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@id/labelDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/labelDate"
+            app:layout_constraintTop_toTopOf="@id/labelDate" />
+
+        <View
+            android:id="@+id/dividerBottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:background="#12FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/labelDate" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/piggyBankItemsRv"
+            list="@{viewModel.piggyBank.items}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dividerBottom"
+            tools:listitem="@layout/item_piggy_bank" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
